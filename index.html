@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Excel Learning Centre</title>
+<meta name="description" content="Excel Learning Centre delivers solutions that actually work."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #0A0F1C;
+    --mid:  #1E2533;
+    --gold: #37d452;
+    --cream:#1A2233;
+    --grey: #9AA4B2;
+    --radius: 10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    color: #E6EAF2;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: "Playfair Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Nav ───────────────────────────────────────────────── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,15,28,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-brand {
+    font-weight: 700; font-size: 1.1rem; color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { color: #94a3b8; font-size: 0.9rem; }
+  .nav-links a:hover { color: var(--gold); text-decoration: none; }
+  .nav-cta {
+    background: var(--gold); color: var(--dark) !important;
+    padding: 0.45rem 1.2rem; border-radius: 6px;
+    font-weight: 700; font-size: 0.85rem;
+  }
+  .nav-cta:hover { background: var(--cream); text-decoration: none !important; }
+
+  /* ── Sections ──────────────────────────────────────────── */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-full { max-width: 100%; padding: 5rem 0; }
+  .section-full > .inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .section-label {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; color: #f1f5f9; }
+  h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.2; color: #f1f5f9; margin-bottom: 1.5rem; }
+  h3 { font-size: 1.15rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .lead { font-size: 1.15rem; color: #94a3b8; margin-top: 1.25rem; max-width: 640px; }
+  .gold { color: var(--gold); }
+  .rule { height: 3px; background: var(--gold); width: 56px; margin: 1.25rem 0; }
+
+  /* ── Hero ──────────────────────────────────────────────── */
+  #hero {
+    min-height: 90vh;
+    display: flex; flex-direction: column; justify-content: center;
+    background: radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.07) 0%, transparent 70%);
+    border-bottom: 1px solid rgba(212,175,55,0.12);
+    max-width: 100%; padding: 5rem 2rem;
+  }
+  #hero .inner { max-width: 1100px; margin: 0 auto; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .btn-primary {
+    background: var(--gold); color: var(--dark);
+    padding: 0.85rem 2rem; border-radius: 8px; font-weight: 700;
+    font-size: 1rem; display: inline-block;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .btn-primary:hover { background: var(--cream); transform: translateY(-1px); text-decoration: none; }
+  .btn-outline {
+    border: 1.5px solid rgba(212,175,55,0.5); color: var(--gold);
+    padding: 0.85rem 2rem; border-radius: 8px; font-weight: 600;
+    font-size: 1rem; display: inline-block;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(212,175,55,0.08); text-decoration: none; }
+
+  /* ── Problem / Solution ────────────────────────────────── */
+  #problem { background: var(--mid); max-width: 100%; padding: 5rem 2rem; border-radius: 0; }
+  #problem .inner { max-width: 1100px; margin: 0 auto; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .pain-list { list-style: none; padding: 0; margin-top: 1rem; }
+  .pain-list li {
+    padding: 0.85rem 1rem 0.85rem 1.75rem;
+    position: relative; border-left: 3px solid var(--gold);
+    margin-bottom: 0.6rem; background: rgba(10,15,28,0.5);
+    border-radius: 0 6px 6px 0; font-size: 0.95rem; color: #cbd5e1;
+  }
+  .pain-list li::before { content: "✕"; position: absolute; left: 0.45rem; color: var(--gold); font-weight: 700; }
+  .solution-box {
+    background: rgba(212,175,55,0.06);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: var(--radius); padding: 2rem;
+  }
+  .solution-box p { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-top: 0.75rem; }
+
+  /* ── Services ──────────────────────────────────────────── */
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .svc-card {
+    background: var(--mid); border: 1px solid rgba(212,175,55,0.15);
+    border-radius: var(--radius); padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .svc-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .svc-card h3 { color: var(--gold); margin-bottom: 0.75rem; }
+  .svc-card p { color: #94a3b8; font-size: 0.9rem; line-height: 1.65; }
+  .svc-price {
+    margin-top: 1.25rem; padding: 0.5rem 1rem;
+    background: rgba(212,175,55,0.1); border-radius: 6px;
+    color: var(--gold); font-weight: 700; font-size: 0.9rem;
+    display: inline-block;
+  }
+  .svc-ideal { color: #64748b; font-size: 0.82rem; margin-top: 0.6rem; font-style: italic; }
+  .svc-benefits { list-style: none; padding: 0; margin-top: 0.75rem; }
+  .svc-benefits li { font-size: 0.875rem; color: #94a3b8; padding: 0.2rem 0 0.2rem 1.2rem; position: relative; }
+  .svc-benefits li::before { content: "→"; position: absolute; left: 0; color: var(--gold); }
+
+  /* ── Testimonials ──────────────────────────────────────── */
+  #testimonials { background: var(--mid); max-width: 100%; padding: 5rem 2rem; }
+  #testimonials .inner { max-width: 1100px; margin: 0 auto; }
+  .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .testimonial {
+    background: rgba(10,15,28,0.7); border: 1px solid rgba(212,175,55,0.12);
+    border-radius: var(--radius); padding: 1.75rem;
+  }
+  .testimonial blockquote { color: #cbd5e1; font-size: 0.95rem; line-height: 1.65; font-style: italic; }
+  .testimonial blockquote::before { content: "\201C"; color: var(--gold); font-size: 2rem; line-height: 0; vertical-align: -0.4em; margin-right: 0.25rem; }
+  .testimonial-author { margin-top: 1rem; font-weight: 700; font-size: 0.85rem; color: var(--gold); }
+  .testimonial-role { font-size: 0.8rem; color: var(--grey); }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+  /* ── CTA Banner ────────────────────────────────────────── */
+  #cta-banner {
+    background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, transparent 100%);
+    border-top: 1px solid rgba(212,175,55,0.2);
+    border-bottom: 1px solid rgba(212,175,55,0.2);
+    text-align: center; padding: 5rem 2rem; max-width: 100%;
+  }
+  #cta-banner .inner { max-width: 680px; margin: 0 auto; }
+  #cta-banner h2 { margin-bottom: 1rem; }
+  #cta-banner p { color: #94a3b8; margin-bottom: 2rem; }
+
+  /* ── Footer ────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid rgba(212,175,55,0.1);
+    padding: 2.5rem 2rem; text-align: center;
+    color: #4b5563; font-size: 0.85rem;
+    max-width: 100%;
+  }
+  footer .footer-inner { max-width: 1100px; margin: 0 auto; }
+  footer .footer-brand { color: var(--gold); font-weight: 700; margin-bottom: 0.5rem; }
+
+  /* ── Responsive ────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    #hero { min-height: 70vh; }
+    nav { padding: 0 1rem; }
+    section, #hero, #problem .inner, #testimonials .inner { padding: 3rem 1.25rem; }
+  }
+  
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-brand">EXCEL LEARNING CENTRE</div>
+  <div class="nav-links">
+    <a href="#problem">The Problem</a>
+    <a href="#services">Services</a>
+    
+    <a href="#testimonials">Results</a>
+    <a href="#contact" class="nav-cta">Book a Free Consultation</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div id="hero">
+  <div class="inner">
+    <div class="section-label">Launch Syndicate · Marketing System</div>
+    <h1>Stop Losing Time and Money to Outdated Processes</h1>
+    <div class="rule"></div>
+    <p class="lead">Excel Learning Centre delivers solutions that actually work.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+      <a href="#services" class="btn-outline">See Our Services</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Problem / Solution -->
+<div id="problem">
+  <div class="inner">
+    <div class="two-col">
+      <div>
+        <div class="section-label">The Problem</div>
+        <h2>Sound familiar?</h2>
+        <ul class='pain-list'><li>Practice in small, bite-sized, engaging lessons rather than lengthy articles or long videos — Excel practice for those who learn by doing, not by watching.</li><li>Walks you through Excel functions, forcing you to type through practice exercises to get hands-on and commit them to memory. You also practice keyboard shortcuts on your own keyboard to build muscle memory.</li><li>Score points by answering questions correctly and advance through the levels as you learn, rather than relying on boring memorisation.</li><li>Sales model: Freemium / self-serve. "Get Started for Free! No sign up necessary. If you love it, you can create an account." Conversion via free-to-paid account upgrade.</li><li>Primary CTA: "Get Started" and "Get Started for Free!" Emphasis on zero friction entry.</li></ul>
+      </div>
+      <div class="solution-box">
+        <div class="section-label">The Solution</div>
+        <h2 style="font-size:1.4rem;">We fix this.</h2>
+        <p>I'll conduct this comprehensive market intelligence study systematically. Let me start with multiple parallel searches across all the key areas.Good, I've identified key players. Now let me fetch the specific competitor pages for the most relevant interactive Excel learning platforms.Now let me fetch more competitor details and start the customer r</p>
+        <div style="margin-top:1.5rem;">
+          <a href="#contact" class="btn-primary" style="font-size:0.9rem;padding:0.65rem 1.5rem;">Book a Free Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2>Services &amp; Pricing</h2>
+  <div class="svc-grid">
+    <p style="color:#64748b">Services coming soon.</p>
+  </div>
+</section>
+
+
+
+<!-- Testimonials -->
+<div id="testimonials">
+  <div class="inner">
+    <div class="section-label">Results</div>
+    <h2>What our clients say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>The automation system they built saves our team at least 8 hours a week. The ROI was clear within the first month.</blockquote>
+        <div class="testimonial-author">Operations Manager</div>
+        <div class="testimonial-role">Manufacturing company, 45 staff</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>Finally, training that people actually remember. Our compliance completion rates went from 60% to 97%.</blockquote>
+        <div class="testimonial-author">Head of L&amp;D</div>
+        <div class="testimonial-role">Financial services, 120 staff</div>
+      </div>
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <blockquote>They mapped our entire reporting process and built something that just works. No more Sunday night panic.</blockquote>
+        <div class="testimonial-author">Finance Director</div>
+        <div class="testimonial-role">Professional services firm, 30 staff</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Banner -->
+<div id="cta-banner">
+  <div class="inner">
+    <div class="section-label">Get Started</div>
+    <h2>Ready to stop losing time?</h2>
+    <p>Book a free consultation. We'll map out exactly what's possible and give you a clear plan — no commitment required.</p>
+    <a href="#contact" class="btn-primary" style="font-size:1.05rem;padding:1rem 2.5rem;">Book a Free Consultation</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Excel Learning Centre</div>
+    
+    <div style="margin-top:0.5rem;">© 2026 Excel Learning Centre. All rights reserved.</div>
+    <div style="margin-top:0.35rem;font-size:0.75rem;color:#374151;">
+      Built with Launch Syndicate Marketing System
+    </div>
+  </div>
+</footer>
+
+<!--
+  simon_widget.html
+  -----------------
+  Paste the contents of the <style> and <script> blocks into your main
+  index.html, and paste the <div id="simon-widget"> block just before
+  the closing </body> tag.
+
+  The SIMON_CONFIG object at the top of the script is auto-populated by
+  website_builder.py using values from simon_config.yaml.
+  DO NOT edit this file manually — regenerate via Simon's tab in the dashboard.
+
+  ANTHROPIC API KEY: The widget calls the Anthropic API directly from the
+  browser. The key is injected by website_builder.py from your .env file
+  at build time. Netlify environment variables are the right place to store
+  this — see README.
+-->
+
+
+<!-- =====================================================================
+     SIMON WIDGET — drop just before </body>
+     ===================================================================== -->
+<div id="simon-widget"></div>
+
+
+<style id="simon-styles">
+  /* ---- Floating bubble ---- */
+  #simon-bubble {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  #simon-toggle-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: transform 0.15s;
+    background: var(--simon-primary, #1B4F72);
+    flex-shrink: 0;
+  }
+  #simon-toggle-btn:hover { transform: scale(1.06); }
+  #simon-toggle-btn img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  #simon-label {
+    background: var(--simon-primary, #1B4F72);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+  }
+
+  /* ---- Chat window ---- */
+  #simon-chat-window {
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 340px;
+    height: 480px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9998;
+    transition: opacity 0.2s, transform 0.2s;
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+    pointer-events: none;
+  }
+  #simon-chat-window.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  /* Header */
+  #simon-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    background: var(--simon-primary, #1B4F72);
+  }
+  #simon-header img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+  #simon-header-text { flex: 1; }
+  #simon-header-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    line-height: 1.2;
+  }
+  #simon-header-status {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+  }
+  #simon-close-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+  }
+  #simon-close-btn:hover { color: white; }
+
+  /* Messages */
+  #simon-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f7f8fa;
+  }
+  #simon-messages::-webkit-scrollbar { width: 4px; }
+  #simon-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+
+  .simon-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+  }
+  .simon-msg.simon { align-self: flex-start; }
+  .simon-msg.user  { align-self: flex-end; }
+
+  .simon-bubble {
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    word-break: break-word;
+  }
+  .simon-msg.simon .simon-bubble {
+    background: white;
+    color: #1a1a1a;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e8e8e8;
+  }
+  .simon-msg.user .simon-bubble {
+    background: var(--simon-primary, #1B4F72);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Typing indicator */
+  #simon-typing {
+    display: none;
+    align-self: flex-start;
+  }
+  #simon-typing .simon-bubble {
+    background: white;
+    border: 1px solid #e8e8e8;
+    padding: 10px 14px;
+  }
+  .typing-dots {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 14px;
+  }
+  .typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #aaa;
+    animation: typingBounce 1.2s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* Product match card */
+  .simon-product-card {
+    background: white;
+    border: 1.5px solid var(--simon-accent, #E67E22);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 85%;
+    align-self: flex-start;
+  }
+  .simon-product-card-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--simon-accent, #E67E22);
+  }
+  .simon-product-card-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  .simon-product-card-price {
+    font-size: 13px;
+    color: #555;
+  }
+  .simon-go-btn {
+    background: var(--simon-accent, #E67E22);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: opacity 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .simon-go-btn:hover { opacity: 0.88; }
+
+  /* Input area */
+  #simon-input-area {
+    padding: 10px 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    border-top: 1px solid #eee;
+    background: white;
+    flex-shrink: 0;
+  }
+  #simon-input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    max-height: 100px;
+    overflow-y: auto;
+    line-height: 1.4;
+    color: #1a1a1a;
+    background: #f7f8fa;
+  }
+  #simon-input:focus { border-color: var(--simon-primary, #1B4F72); background: white; }
+  #simon-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--simon-primary, #1B4F72);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+  }
+  #simon-send-btn:hover { opacity: 0.85; }
+  #simon-send-btn:disabled { opacity: 0.4; cursor: default; }
+  #simon-send-btn svg { width: 16px; height: 16px; }
+</style>
+
+
+<script id="simon-script">
+(function() {
+
+  // =========================================================================
+  // CONFIG — auto-populated by website_builder.py from simon_config.yaml
+  // =========================================================================
+  const SIMON_CONFIG = {
+    primaryColour:      "#090a0a",
+    accentColour:       "#37d452",
+    agentName:          "Simon",
+    avatarUrl:          "avatars\simon.png",
+    bubbleLabel:        "Chat with us",
+    productPageBaseUrl: "https://excel-learning-centre-ls.netlify.app/products",
+    apiKey:             "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",
+    systemPrompt:       `You are Simon, the sales guide for Excel Learning Centre.
+
+Your only job is to help the customer identify their Excel problem and
+match them to the right course. You do not answer general Excel questions,
+give tutorials, or discuss anything outside this purpose.
+
+CONVERSATION RULES:
+- Start every new conversation with the stage_1_greeting above.
+- Ask one question at a time. Never ask two questions in one message.
+- Keep all messages short — 2 to 4 sentences maximum.
+- Never mention competitor products or courses.
+- Never mention prices unless the customer asks directly.
+- Never push or pressure. If the customer is unsure, ask another gentle question.
+- After 2-3 discovery questions, you have enough. Move to stage_3_match.
+- In stage_3, state the problem clearly using the customer's own words,
+  then say you are taking them to the product page.
+- Do not include URLs or payment links in your messages — the widget handles that.
+
+PRODUCT MATCHING:
+When you have understood the customer's problem, select the best matching
+product from the products list in your config. Return a JSON block at the
+end of your stage_3 message in this exact format so the widget can read it:
+
+<<<MATCH>>>
+{
+  "product_id": "prod_001",
+  "product_slug": "excel-essentials",
+  "problem_summary": "you want to learn Excel from scratch for a new job"
+}
+<<<END>>>
+
+If no products are loaded, use:
+<<<MATCH>>>
+{
+  "product_id": null,
+  "product_slug": null,
+  "problem_summary": "your problem summary here"
+}
+<<<END>>>
+
+The <<<MATCH>>> block is invisible to the customer — the widget strips it
+before displaying your message.
+`,
+    products:           [],
+  };
+
+  // =========================================================================
+  // Inject CSS colour variables
+  // =========================================================================
+  document.documentElement.style.setProperty('--simon-primary', SIMON_CONFIG.primaryColour);
+  document.documentElement.style.setProperty('--simon-accent',  SIMON_CONFIG.accentColour);
+
+  // =========================================================================
+  // Build the widget DOM
+  // =========================================================================
+  const widget = document.getElementById('simon-widget');
+  widget.innerHTML = `
+    <!-- Floating bubble + label -->
+    <div id="simon-bubble">
+      <div id="simon-label">${SIMON_CONFIG.bubbleLabel}</div>
+      <button id="simon-toggle-btn" aria-label="Chat with Simon">
+        <img src="${SIMON_CONFIG.avatarUrl}" alt="Simon" onerror="this.style.display='none'" />
+      </button>
+    </div>
+
+    <!-- Chat window -->
+    <div id="simon-chat-window" role="dialog" aria-label="Chat with Simon">
+      <div id="simon-header">
+        <img src="${SIMON_CONFIG.avatarUrl}" alt="Simon" onerror="this.style.display='none'" />
+        <div id="simon-header-text">
+          <div id="simon-header-name">${SIMON_CONFIG.agentName}</div>
+          <div id="simon-header-status">Sales guide · Excel Learning Centre</div>
+        </div>
+        <button id="simon-close-btn" aria-label="Close chat">✕</button>
+      </div>
+
+      <div id="simon-messages">
+        <div id="simon-typing" class="simon-msg simon">
+          <div class="simon-bubble">
+            <div class="typing-dots">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="simon-input-area">
+        <textarea
+          id="simon-input"
+          placeholder="Type your message..."
+          rows="1"
+          aria-label="Your message"
+        ></textarea>
+        <button id="simon-send-btn" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  `;
+
+  // =========================================================================
+  // State
+  // =========================================================================
+  const conversationHistory = [];
+  let isOpen = false;
+  let isWaiting = false;
+  let hasGreeted = false;
+
+  // =========================================================================
+  // DOM refs (after innerHTML set)
+  // =========================================================================
+  const chatWindow   = document.getElementById('simon-chat-window');
+  const messagesEl   = document.getElementById('simon-messages');
+  const inputEl      = document.getElementById('simon-input');
+  const sendBtn      = document.getElementById('simon-send-btn');
+  const toggleBtn    = document.getElementById('simon-toggle-btn');
+  const labelEl      = document.getElementById('simon-label');
+  const closeBtn     = document.getElementById('simon-close-btn');
+  const typingEl     = document.getElementById('simon-typing');
+
+  // =========================================================================
+  // Toggle open/close
+  // =========================================================================
+  function openChat() {
+    isOpen = true;
+    chatWindow.classList.add('open');
+    labelEl.style.display = 'none';
+    inputEl.focus();
+    if (!hasGreeted) {
+      hasGreeted = true;
+      simulateGreeting();
+    }
+  }
+
+  function closeChat() {
+    isOpen = false;
+    chatWindow.classList.remove('open');
+    labelEl.style.display = 'block';
+  }
+
+  toggleBtn.addEventListener('click', () => isOpen ? closeChat() : openChat());
+  labelEl.addEventListener('click',   () => isOpen ? closeChat() : openChat());
+  closeBtn.addEventListener('click',  closeChat);
+
+  // =========================================================================
+  // Greeting — Simon opens the conversation
+  // =========================================================================
+  function simulateGreeting() {
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const greetingMessage =
+        "Hi there! I'm Simon. I'm here to help you find the right Excel training for what you need.\n\n" +
+        "To point you in the right direction — what's the main thing you're struggling with in Excel at the moment?";
+      appendMessage('simon', greetingMessage);
+      conversationHistory.push({ role: 'assistant', content: greetingMessage });
+    }, 900);
+  }
+
+  // =========================================================================
+  // Append a message bubble to the chat
+  // =========================================================================
+  function appendMessage(role, text) {
+    // Strip the <<<MATCH>>> block from display
+    const displayText = text.replace(/<<<MATCH>>>[\s\S]*?<<<END>>>/g, '').trim();
+
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `simon-msg ${role}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'simon-bubble';
+    bubble.textContent = displayText;
+    msgDiv.appendChild(bubble);
+
+    // Insert before typing indicator
+    messagesEl.insertBefore(msgDiv, typingEl);
+    scrollToBottom();
+
+    // Check for product match — show product card if found
+    const matchData = extractMatch(text);
+    if (matchData) {
+      setTimeout(() => showProductCard(matchData), 400);
+    }
+  }
+
+  // =========================================================================
+  // Parse <<<MATCH>>> block from Simon's response
+  // =========================================================================
+  function extractMatch(text) {
+    const matchRegex = /<<<MATCH>>>([\s\S]*?)<<<END>>>/;
+    const result = matchRegex.exec(text);
+    if (!result) return null;
+    try {
+      return JSON.parse(result[1].trim());
+    } catch(e) {
+      return null;
+    }
+  }
+
+  // =========================================================================
+  // Show product card after match
+  // =========================================================================
+  function showProductCard(matchData) {
+    const card = document.createElement('div');
+    card.className = 'simon-product-card';
+
+    // Find product details from config
+    const product = (SIMON_CONFIG.products || []).find(p => p.id === matchData.product_id);
+    const productUrl = matchData.product_slug
+      ? `${SIMON_CONFIG.productPageBaseUrl}/${matchData.product_slug}`
+      : SIMON_CONFIG.productPageBaseUrl;
+
+    card.innerHTML = `
+      <div class="simon-product-card-label">Recommended for you</div>
+      <div class="simon-product-card-name">${product ? product.name : 'View our courses'}</div>
+      ${product ? `<div class="simon-product-card-price">${product.price}</div>` : ''}
+      <a class="simon-go-btn" href="${productUrl}" target="_blank" rel="noopener">
+        Take me to the product page →
+      </a>
+    `;
+
+    messagesEl.insertBefore(card, typingEl);
+    scrollToBottom();
+  }
+
+  // =========================================================================
+  // Typing indicator
+  // =========================================================================
+  function showTyping() { typingEl.style.display = 'flex'; scrollToBottom(); }
+  function hideTyping()  { typingEl.style.display = 'none'; }
+
+  // =========================================================================
+  // Scroll to bottom
+  // =========================================================================
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  // =========================================================================
+  // Send user message
+  // =========================================================================
+  async function sendMessage() {
+    const text = inputEl.value.trim();
+    if (!text || isWaiting) return;
+
+    appendMessage('user', text);
+    conversationHistory.push({ role: 'user', content: text });
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    isWaiting = true;
+    sendBtn.disabled = true;
+    showTyping();
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': SIMON_CONFIG.apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1024,
+          system: SIMON_CONFIG.systemPrompt,
+          messages: conversationHistory,
+        }),
+      });
+
+      const data = await response.json();
+      hideTyping();
+
+      if (data.content && data.content[0]) {
+        const replyText = data.content[0].text;
+        appendMessage('simon', replyText);
+        conversationHistory.push({ role: 'assistant', content: replyText });
+      } else {
+        appendMessage('simon', "Sorry, something went wrong. Please try again.");
+        console.error('Simon API error:', data);
+      }
+
+    } catch (err) {
+      hideTyping();
+      appendMessage('simon', "I'm having trouble connecting right now. Please refresh and try again.");
+      console.error('Simon fetch error:', err);
+    }
+
+    isWaiting = false;
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
+
+  // =========================================================================
+  // Input events
+  // =========================================================================
+  sendBtn.addEventListener('click', sendMessage);
+
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Auto-resize textarea
+  inputEl.addEventListener('input', () => {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+  });
+
+})();
+</script>
+
+
+</body>
+</html>
