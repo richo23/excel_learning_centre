@@ -12,7 +12,7 @@
   :root {
     --dark: #0A0F1C;
     --mid:  #1E2533;
-    --gold: #37d47a;
+    --gold: #D4AF37;
     --cream:#1A2233;
     --grey: #9AA4B2;
     --radius: 10px;
@@ -216,12 +216,12 @@
       <div>
         <div class="section-label">The Problem</div>
         <h2>Sound familiar?</h2>
-        <ul class='pain-list'><li>Practice in small, bite-sized, engaging lessons rather than lengthy articles or long videos — Excel practice for those who learn by doing, not by watching.</li><li>Walks you through Excel functions, forcing you to type through practice exercises to get hands-on and commit them to memory. You also practice keyboard shortcuts on your own keyboard to build muscle memory.</li><li>Score points by answering questions correctly and advance through the levels as you learn, rather than relying on boring memorisation.</li><li>Sales model: Freemium / self-serve. "Get Started for Free! No sign up necessary. If you love it, you can create an account." Conversion via free-to-paid account upgrade.</li><li>Primary CTA: "Get Started" and "Get Started for Free!" Emphasis on zero friction entry.</li></ul>
+        <ul class='pain-list'><li>Hours lost every week to manual, repetitive tasks</li><li>Training that employees forget within 24 hours</li><li>Spreadsheets too complex for anyone to maintain reliably</li></ul>
       </div>
       <div class="solution-box">
         <div class="section-label">The Solution</div>
         <h2 style="font-size:1.4rem;">We fix this.</h2>
-        <p>I'll conduct this comprehensive market intelligence study systematically. Let me start with multiple parallel searches across all the key areas.Good, I've identified key players. Now let me fetch the specific competitor pages for the most relevant interactive Excel learning platforms.Now let me fetch more competitor details and start the customer r</p>
+        <p></p>
         <div style="margin-top:1.5rem;">
           <a href="#contact" class="btn-primary" style="font-size:0.9rem;padding:0.65rem 1.5rem;">Book a Free Consultation</a>
         </div>
@@ -594,10 +594,10 @@
   // CONFIG — auto-populated by website_builder.py from simon_config.yaml
   // =========================================================================
   const SIMON_CONFIG = {
-    primaryColour:      "#050606",
-    accentColour:       "#37d47a",
+    primaryColour:      "#1B4F72",
+    accentColour:       "#D4AF37",
     agentName:          "Simon",
-    avatarUrl:          "avatars\simon.png",
+    avatarUrl:          "avatars\chatbots\simon.png",
     bubbleLabel:        "Chat with us",
     productPageBaseUrl: "https://excel-learning-centre-ls.netlify.app/products",
     apiKey:             "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",
@@ -672,7 +672,7 @@ before displaying your message.
         <img src="${SIMON_CONFIG.avatarUrl}" alt="Simon" onerror="this.style.display='none'" />
         <div id="simon-header-text">
           <div id="simon-header-name">${SIMON_CONFIG.agentName}</div>
-          <div id="simon-header-status">Sales guide · Excel Learning Centre</div>
+        <div id="simon-header-status">Sales guide · {{SIMON_BUSINESS_NAME}}</div>
         </div>
         <button id="simon-close-btn" aria-label="Close chat">✕</button>
       </div>
@@ -711,6 +711,9 @@ before displaying your message.
   let isOpen = false;
   let isWaiting = false;
   let hasGreeted = false;
+
+  // Open automatically on page load after a short delay
+  setTimeout(() => openChat(), 1200);
 
   // =========================================================================
   // DOM refs (after innerHTML set)
